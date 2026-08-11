@@ -62,15 +62,13 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 }
 
 .logo-mark {
-  display: inline-flex;
-  font-family: "Oswald", Arial, sans-serif;
-  font-weight: 700;
-  font-size: 1.9rem;
-  letter-spacing: -0.02em;
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
 }
-.logo-b { color: var(--white); }
-.logo-a { color: var(--accent); margin-left: -2px; }
-.logo-mark--lg { font-size: 2.4rem; }
+.logo-mark--lg { width: 64px; height: 64px; }
 
 .nav {
   display: none;
