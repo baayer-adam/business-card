@@ -371,12 +371,13 @@ html.motion-ok .feature-list .icon-circle {
     content: "";
     position: absolute;
     top: 50%;
-    right: -22px;
-    width: 12px;
-    height: 12px;
+    right: -15px;
+    width: 10px;
+    height: 10px;
     border-top: 2px solid var(--accent);
     border-right: 2px solid var(--accent);
     transform: translateY(-50%) rotate(45deg);
+    z-index: 1;
   }
 }
 
@@ -841,10 +842,13 @@ html.motion-ok .hero-globe-fallback { animation: globe-spin 16s linear infinite;
   display: flex;
   gap: 14px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  /* proximity, а не mandatory: mandatory заставляет Safari перехватывать
+     вертикальный жест трекпада над галереей и мешает листать страницу дальше. */
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
   padding: 4px 4px 14px;
   margin: 0 -4px;
-  -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: var(--card-border) transparent;
 }
