@@ -492,6 +492,14 @@ html.motion-ok .feature-list .icon-circle {
 }
 .footer-bottom svg { width: 22px; height: 22px; }
 
+.footer-legal { margin: 14px 0 0; }
+.footer-legal a {
+  color: var(--gray);
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+.footer-legal a:hover { color: var(--accent); }
+
 /* ---------- motion: plane / routes (gated by html.motion-ok, set in <head>) ---------- */
 
 .plane-static { opacity: 1; }
