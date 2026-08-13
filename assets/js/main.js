@@ -22,3 +22,32 @@
     if (e.key === "Escape") closeNav();
   });
 })();
+
+/* ---------- Цели Яндекс.Метрики: клики в мессенджеры ----------
+   Все заявки уходят из сайта в WhatsApp / Telegram / Instagram, поэтому без
+   этих целей Метрика покажет 100% отказов и ничего полезного. Цели с такими
+   же идентификаторами нужно создать в интерфейсе Метрики:
+   whatsapp, telegram, tg_store, instagram. */
+(function () {
+  document.addEventListener("click", function (e) {
+    if (!window.YM_ID || typeof window.ym !== "function") return;
+
+    // В кнопках лежат inline-<svg>, поэтому e.target часто SVG-элемент —
+    // поднимаемся до ближайшего узла, у которого есть closest().
+    var node = e.target;
+    while (node && typeof node.closest !== "function") node = node.parentNode;
+    if (!node) return;
+
+    var link = node.closest("a[href]");
+    if (!link) return;
+
+    var href = link.href || "";
+    var goal =
+      href.indexOf("wa.me") > -1 ? "whatsapp" :
+      href.indexOf("t.me/AdamNewBalance") > -1 ? "tg_store" :
+      href.indexOf("t.me") > -1 ? "telegram" :
+      href.indexOf("instagram.com") > -1 ? "instagram" : null;
+
+    if (goal) window.ym(window.YM_ID, "reachGoal", goal);
+  });
+})();

@@ -621,6 +621,19 @@ html.intro-skip.motion-ok .piece-a     { animation-delay: 0.25s; }
 html.intro-skip.motion-ok .piece-text  { animation-delay: 0.4s; }
 html.intro-skip.motion-ok .piece-plane { animation-delay: 0.5s; }
 
+/* Мобильные и планшеты: заставку не показываем совсем.
+   Основная часть поискового трафика — с телефонов, а 3,4 с чёрного экрана
+   на входе рушат LCP и увеличивают отказы. На десктопе заставка остаётся. */
+@media (max-width: 1023.98px) {
+  .intro { display: none; }
+
+  html.motion-ok .piece-globe { animation-delay: 0.1s; }
+  html.motion-ok .piece-b     { animation-delay: 0.2s; }
+  html.motion-ok .piece-a     { animation-delay: 0.25s; }
+  html.motion-ok .piece-text  { animation-delay: 0.4s; }
+  html.motion-ok .piece-plane { animation-delay: 0.5s; }
+}
+
 @keyframes piece-in-globe { from { opacity: 0; transform: translate(-60px, -46px) rotate(-18deg); } to { opacity: 1; transform: none; } }
 @keyframes piece-in-b     { from { opacity: 0; transform: translate(-70px, 24px) rotate(-14deg); } to { opacity: 1; transform: none; } }
 @keyframes piece-in-a     { from { opacity: 0; transform: translate(70px, 24px) rotate(14deg); } to { opacity: 1; transform: none; } }
@@ -881,6 +894,65 @@ html.motion-ok .hero-globe-fallback { animation: globe-spin 16s linear infinite;
   display: block;
 }
 
+/* ---------- faq ---------- */
+
+.faq { padding-block: 64px; }
+
+.faq-list {
+  max-width: 760px;
+  margin-inline: auto;
+  display: grid;
+  gap: 12px;
+}
+
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 18px 22px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding-right: 26px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-item summary h3 {
+  display: inline;
+  margin: 0;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+  transition: color 0.2s ease;
+}
+.faq-item summary:hover h3,
+.faq-item[open] summary h3 { color: var(--accent); }
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--accent);
+  font-family: Arial, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+.faq-item[open] summary::after { content: "\2212"; }
+
+.faq-answer {
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--card-border);
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
 /* ---------- contact ---------- */
 
 .contact { padding-block: 64px; }
@@ -939,6 +1011,24 @@ html.js-ready.motion-ok .reveal {
 html.js-ready.motion-ok .reveal.is-visible {
   opacity: 1;
   transform: none;
+}
+
+/* ---------- accessibility: visually hidden ----------
+   Заголовки, нужные поисковикам и скринридерам, но не вписанные в макет.
+   position: absolute без top/left оставляет элемент в статической позиции,
+   поэтому окружающий поток схлопывается и вёрстка не сдвигается. */
+
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ---------- accessibility: reduced motion ---------- */
