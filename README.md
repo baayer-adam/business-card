@@ -16,7 +16,14 @@ assets/css/style.css  стили
 assets/js/main.js     меню, цели Метрики
 assets/js/animations.js  reveal при скролле, глобус (Cobe)
 assets/img/           логотипы, og-карточка, фото магазина
+assets/fonts/         Montserrat и Bebas Neue (woff2, свой хостинг)
 ```
+
+Шрифты лежат у нас, а не грузятся с Google: так текст рисуется без похода
+на сторонний домен и IP посетителей не уходит в Google. `@font-face`
+с `unicode-range` в начале `style.css` — браузер скачивает только тот
+набор символов, который реально нужен. Bebas Neue кириллицы не содержит,
+русский текст в нём осознанно падает на Arial.
 
 ## Аналитика
 
